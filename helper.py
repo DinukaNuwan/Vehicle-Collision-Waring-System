@@ -11,31 +11,32 @@ class Box:
 
 
 def overlap(x1, w1, x2, w2):
-    l1 = x1 - w1 / 2.;
-    l2 = x2 - w2 / 2.;
+    l1 = x1 - w1 / 2.
+    l2 = x2 - w2 / 2.
     left = max(l1, l2)
-    r1 = x1 + w1 / 2.;
-    r2 = x2 + w2 / 2.;
+    r1 = x1 + w1 / 2.
+    r2 = x2 + w2 / 2.
     right = min(r1, r2)
-    return right - left;
+    return right - left
 
 
 def box_intersection(a, b):
-    w = overlap(a.x, a.w, b.x, b.w);
-    h = overlap(a.y, a.h, b.y, b.h);
-    if w < 0 or h < 0: return 0;
-    area = w * h;
-    return area;
+    w = overlap(a.x, a.w, b.x, b.w)
+    h = overlap(a.y, a.h, b.y, b.h)
+    if w < 0 or h < 0:
+        return 0
+    area = w * h
+    return area
 
 
 def box_union(a, b):
-    i = box_intersection(a, b);
-    u = a.w * a.h + b.w * b.h - i;
-    return u;
+    i = box_intersection(a, b)
+    u = a.w * a.h + b.w * b.h - i
+    return u
 
 
 def box_iou(a, b):
-    return box_intersection(a, b) / box_union(a, b);
+    return box_intersection(a, b) / box_union(a, b)
 
 
 def box_iou2(a, b):
@@ -73,8 +74,10 @@ def convert_to_pixel(box_yolo, img, crop_range):
     height = int(box.h * (y_max - y_min))
 
     # Deal with corner cases
-    if left < 0:  left = 0
-    if top < 0:   top = 0
+    if left < 0:
+        left = 0
+    if top < 0:
+        top = 0
 
     # Return the coordinates (in the unit of the pixels)
 
